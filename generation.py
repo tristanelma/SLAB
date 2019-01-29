@@ -11,7 +11,8 @@ lang = open('dicts/sp.txt','w')
 lang.write(sample_word + '\n')
 lang.close()
 
-# to do: add random color in text generation 
+# to do: add random color in text generation, random line generation
+
 subprocess.call(['rm', '-rf', 'data_generation/false_samples'])
 subprocess.call(['rm', '-rf', 'data_generation/positive_samples'])
 
@@ -37,6 +38,7 @@ for i in range(375):
     img_draw.line([(x1, y1), (x2, y2)], width=w, fill='brown')
     img.save('data_generation/positive_samples/%d.jpg' % i)
 
+#altering false samples
 for x in range(3375):
     img = Image.open('data_generation/alter_false/%d.jpg' % x)
     w = random.randint(1, img.size[1]/2)
