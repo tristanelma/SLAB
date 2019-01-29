@@ -2,3 +2,5 @@ TextRecognitionDataGenerator/**
 .DS_Store
 dicts/**
 fonts/**
+data_generation/positive_samples/**
+data_generation/false_samples/**
