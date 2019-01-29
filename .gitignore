@@ -1,1 +1,4 @@
 TextRecognitionDataGenerator/**
+.DS_Store
+dicts/**
+fonts/**
