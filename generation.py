@@ -16,6 +16,10 @@ lang.close()
 subprocess.call(['rm', '-rf', 'data_generation/false_samples'])
 subprocess.call(['rm', '-rf', 'data_generation/positive_samples'])
 
+# Jeff: For other flags you can use to generate the images from 
+# TextRecognitionDataGenerator repo, cd into TextRecognitionDataGenerator/TextRecognitionDataGenerator/
+# and call `python run.py -h`
+
 # unaltered files get name format 0
 subprocess.call(['python', 'TextRecognitionDataGenerator/TextRecognitionDataGenerator/run.py', '--output_dir', 'data_generation/positive_samples' , '-na' , '0' ,'-l', 'sp', '-c', '750', '-w', '1'])
 subprocess.call(['python', 'TextRecognitionDataGenerator/TextRecognitionDataGenerator/run.py', '--output_dir', 'data_generation/false_samples' , '-na' , '0' ,'-l', 'sp', '-c', '6750', '-w', '1'])
