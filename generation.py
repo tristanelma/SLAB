@@ -2,6 +2,9 @@
 # TextRecognitionDataGenerator repo, cd into TextRecognitionDataGenerator/TextRecognitionDataGenerator/
 # and call `python run.py -h`
 
+
+#test commit, lulich
+
 import sys
 import random
 import subprocess
