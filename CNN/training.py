@@ -19,7 +19,6 @@ from sklearn.metrics import confusion_matrix
 
 # You are not allowed to change any of these constants.
 
-INPUT_STRING = sys.argv[1]
 DATA_PATH = 'data_generation/'
 TEST_PERCENT = 0.2
 SELECT_SUBSET_PERCENT = 1
