@@ -32,8 +32,8 @@ DATAGEN_LOC = 'TextRecognitionDataGenerator/TextRecognitionDataGenerator/run.py'
 subprocess.call(['python', DATAGEN_LOC, '--output_dir', 'data_generation/training/positive_samples' , '-na' , '0' ,'-l', 'sp', '-c', str(int(total_size*positive_split*training_split*unaltered_split)), '-w', '1'])
 subprocess.call(['python', DATAGEN_LOC, '--output_dir', 'data_generation/training/false_samples' , '-na' , '0' ,'-l', 'en', '-c', str(int(total_size*negative_split*training_split*unaltered_split)), '-w', '1'])
 # blurred files get name format 1
-subprocess.call(['python', DATAGEN_LOC, '--output_dir', 'data_generation/training/positive_samples', '-na', '1', '-l', 'sp', '-c', str(int(total_size*positive_split*training_split*blurred_split)), '-w', '1', '-bl', '3', '-rbl', '-k', '45', '-rk'])
-subprocess.call(['python', DATAGEN_LOC, '--output_dir', 'data_generation/training/false_samples', '-na', '1', '-l', 'en', '-c', str(int(total_size*negative_split*training_split*blurred_split)), '-w', '1', '-bl', '3', '-rbl', '-k', '45', '-rk'])
+subprocess.call(['python', DATAGEN_LOC, '--output_dir', 'data_generation/training/positive_samples', '-na', '1', '-l', 'sp', '-c', str(int(total_size*positive_split*training_split*blurred_split)), '-w', '1', '-bl', '2', '-rbl', '-k', '45', '-rk'])
+subprocess.call(['python', DATAGEN_LOC, '--output_dir', 'data_generation/training/false_samples', '-na', '1', '-l', 'en', '-c', str(int(total_size*negative_split*training_split*blurred_split)), '-w', '1', '-bl', '2', '-rbl', '-k', '45', '-rk'])
 # manually altered files get name format 2
 subprocess.call(['python', DATAGEN_LOC, '--output_dir', 'data_generation/training/alter_pos', '-na', '2', '-l', 'sp', '-c', str(int(total_size*positive_split*training_split*drawn_split)), '-w', '1', '-k', '45', '-rk'])
 subprocess.call(['python', DATAGEN_LOC, '--output_dir', 'data_generation/training/alter_false', '-na', '2', '-l', 'en', '-c', str(int(total_size*negative_split*training_split*drawn_split)), '-w', '1', '-k', '45', '-rk'])
@@ -43,8 +43,8 @@ subprocess.call(['python', DATAGEN_LOC, '--output_dir', 'data_generation/trainin
 subprocess.call(['python', DATAGEN_LOC, '--output_dir', 'data_generation/testing/positive_samples' , '-na' , '0' ,'-l', 'sp', '-c',str(int(total_size*positive_split*test_split*unaltered_split)), '-w', '1'])
 subprocess.call(['python', DATAGEN_LOC, '--output_dir', 'data_generation/testing/false_samples' , '-na' , '0' ,'-l', 'en', '-c', str(int(total_size*negative_split*test_split*unaltered_split)), '-w', '1'])
 # blurred files get name format 1
-subprocess.call(['python', DATAGEN_LOC, '--output_dir', 'data_generation/testing/positive_samples', '-na', '1', '-l', 'sp', '-c', str(int(total_size*positive_split*test_split*blurred_split)), '-w', '1', '-bl', '3', '-rbl', '-k', '45', '-rk'])
-subprocess.call(['python', DATAGEN_LOC, '--output_dir', 'data_generation/testing/false_samples', '-na', '1', '-l', 'en', '-c', str(int(total_size*negative_split*test_split*blurred_split)), '-w', '1', '-bl', '3', '-rbl', '-k', '45', '-rk'])
+subprocess.call(['python', DATAGEN_LOC, '--output_dir', 'data_generation/testing/positive_samples', '-na', '1', '-l', 'sp', '-c', str(int(total_size*positive_split*test_split*blurred_split)), '-w', '1', '-bl', '2', '-rbl', '-k', '45', '-rk'])
+subprocess.call(['python', DATAGEN_LOC, '--output_dir', 'data_generation/testing/false_samples', '-na', '1', '-l', 'en', '-c', str(int(total_size*negative_split*test_split*blurred_split)), '-w', '1', '-bl', '2', '-rbl', '-k', '45', '-rk'])
 # manually altered files get name format 2
 subprocess.call(['python', DATAGEN_LOC, '--output_dir', 'data_generation/testing/alter_pos', '-na', '2', '-l', 'sp', '-c', str(int(total_size*positive_split*test_split*drawn_split)), '-w', '1', '-k', '45', '-rk'])
 subprocess.call(['python', DATAGEN_LOC, '--output_dir', 'data_generation/testing/alter_false', '-na', '2', '-l', 'en', '-c', str(int(total_size*negative_split*test_split*drawn_split)), '-w', '1', '-k', '45', '-rk'])
