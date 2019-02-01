@@ -1,4 +1,3 @@
-TextRecognitionDataGenerator/**
+CNN/TextRecognitionDataGenerator/**
 .DS_Store
-data_generation/positive_samples/**
-data_generation/false_samples/**
+CNN/data_generation/**
