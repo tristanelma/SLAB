@@ -2,6 +2,9 @@ import sys
 import random
 import subprocess
 import os
+from scipy.ndimage import imread
+from scipy.misc import imsave
+import cv2
 
 from PIL import Image
 from PIL import ImageDraw
@@ -21,6 +24,10 @@ test_split = 0.2
 unaltered_split = 0.5
 blurred_split = 0.25
 drawn_split = 0.25
+RESIZE_WIDTH=32
+RESIZE_HEIGHT=32
+DATA_PATH_1 = 'data_generation/positive_samples/'
+DATA_PATH_2 = 'data_generation/false_samples/'
 
 subprocess.call(['rm', '-rf', 'data_generation'])
 subprocess.call(['mkdir', 'data_generation'])
@@ -67,9 +74,6 @@ for x in range(int(total_size*negative_split*drawn_split)):
 
 subprocess.call(['rm', '-rf', 'data_generation/alter_false'])
 subprocess.call(['rm', '-rf', 'data_generation/alter_pos'])
-
-DATA_PATH_1 = 'data_generation/positive_samples/'
-DATA_PATH_2 = 'data_generation/false_samples/'
 
 files_1 = os.listdir(DATA_PATH_1)
 for i, input_file in enumerate(files_1):
