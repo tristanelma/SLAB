@@ -7,6 +7,7 @@ from scipy.misc import imsave
 import cv2
 import sklearn.utils
 import subprocess
+import sys, getopt
 
 from keras.models import Sequential
 from keras.layers import Input, Dropout, Flatten, Conv2D, MaxPooling2D, Dense, Activation
@@ -18,18 +19,44 @@ from sklearn.metrics import classification_report
 from sklearn.metrics import confusion_matrix
 
 # You are not allowed to change any of these constants.
-
 DATA_PATH = 'data_generation/'
-TEST_PERCENT = 0.2
-SELECT_SUBSET_PERCENT = 1
-
-# The cat and dog images are of variable size.
 RESIZE_WIDTH=32
 RESIZE_HEIGHT=32
-EPOCHS = 5
-batch_size = 64
 
-# Lets get started by loading the data.
+# These constants can be overridden with command line arguments. See below.
+EPOCHS = 5
+BATCH_SIZE = 64
+LEARNING_RATE = 1e-4
+TEST_PERCENT = 0.2
+#SELECT_SUBSET_PERCENT = 1
+
+# Handle command line arguments.
+try:
+    opts, args = getopt.getopt(sys.argv[1:],"ht:e:l:b:")
+except getopt.GetoptError:
+    print('---')
+    print('USAGE: "python training.py -t <TEST_PERCENT> -e <EPOCHS> -l <LEARNING_RATE> -b <BATCH_SIZE>"')
+    print('NOTE: All command-line options are optional (they have defaults). Use "python training.py -h" to view this again.')
+    print('---')
+    sys.exit(2)
+for opt, arg in opts:
+    if opt == '-h':
+        print('---')
+        print('USAGE: "python training.py -t <TEST_PERCENT> -e <EPOCHS> -l <LEARNING_RATE> -b <BATCH_SIZE>"')
+        print('NOTE: All command-line options are optional (they have defaults). Use "python training.py -h" to view this again.')
+        print('---')
+        sys.exit()
+    elif opt == '-t':
+        TEST_PERCENT = float(arg)
+    elif opt == '-e':
+        print(arg)
+        EPOCHS = int(arg)
+    elif opt == '-l':
+        LEARNING_RATE = float(arg)
+    elif opt == '-b':
+        BATCH_SIZE = int(arg)
+
+# Let's get started by loading the data.
 X = []
 Y = []
 
@@ -42,7 +69,7 @@ print('Going to load %i files' % len(shuffled_files))
 for i, input_file in enumerate(shuffled_files):
     if i % DISPLAY_COUNT == 0 and i != 0:
         print('Have loaded %i samples' % i)
-        
+
     img = imread(DATA_PATH + input_file)
     img = cv2.resize(img, (RESIZE_WIDTH, RESIZE_HEIGHT), interpolation=cv2.INTER_CUBIC)
     X.append(img)
@@ -50,7 +77,7 @@ for i, input_file in enumerate(shuffled_files):
         Y.append(1.0)
     else:
         Y.append(0.0)
-        
+
 X = np.array(X)
 Y = np.array(Y)
 
@@ -99,14 +126,14 @@ model.add(Dense(1, kernel_initializer='glorot_normal'))
 model.add(Activation('sigmoid'))
 
 # Define your loss and your objective
-optimizer = RMSprop(lr=1e-4)
+optimizer = RMSprop(lr=LEARNING_RATE)
 loss = 'binary_crossentropy'
 model.compile(loss=loss, optimizer=optimizer, metrics=['accuracy'])
 
 
-model.fit(train_X, train_Y, batch_size=batch_size, epochs=EPOCHS, validation_split=0.2, verbose=1, shuffle=True)
+model.fit(train_X, train_Y, batch_size=BATCH_SIZE, epochs=EPOCHS, validation_split=0.2, verbose=1, shuffle=True)
 
-loss, acc = model.evaluate(test_X, test_Y, batch_size=batch_size, verbose=1)
+loss, acc = model.evaluate(test_X, test_Y, batch_size=BATCH_SIZE, verbose=1)
 print('')
 print('Got %.2f%% accuracy' % (acc * 100.))
 
@@ -116,6 +143,6 @@ for i in range(len(predictions)):
         predictions[i] = 0.0
     else:
         predictions[i] = 1.0
-    
+
 print(classification_report(test_Y, predictions))
 print(confusion_matrix(test_Y, predictions))
