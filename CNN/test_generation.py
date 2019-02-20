@@ -1,9 +1,10 @@
 import cv2
 import math
 import os
-import random
+from random import randint
 import sys
 import numpy as np
+from scipy.ndimage import imread
 
 from PIL import Image, ImageDraw, ImageFilter
 
@@ -30,6 +31,7 @@ if __name__ == '__main__':
     #back_image.show()
 
     DATAGEN_LOC = 'TextRecognitionDataGenerator/TextRecognitionDataGenerator/run.py'
+    os.system('rm -rf ' + DATA_PATH_1)
     os.system('python ' + DATAGEN_LOC + ' --output_dir data_generation/picture1 -na 0 -l sp -c 1 -w 1')
     os.system('python ' + DATAGEN_LOC + ' --output_dir data_generation/picture1 -na 0 -l en -c 2 -w 1')
 
@@ -39,7 +41,9 @@ if __name__ == '__main__':
 
     files_1 = os.listdir(DATA_PATH_1)
     for _, input_file in enumerate(files_1):
-        im = imread(DATA_PATH_1 + input_file)
-        position()
-        back_image.paste(paste_img, position)
+        im = Image.open(DATA_PATH_1 + input_file)
+        w, h = im.size
+        position = (randint(0, WIDTH-w), randint(0, HEIGHT-h))
+        back_image.paste(im, position)
+    back_image.show()
     
