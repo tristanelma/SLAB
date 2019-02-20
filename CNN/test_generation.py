@@ -43,7 +43,14 @@ if __name__ == '__main__':
     for _, input_file in enumerate(files_1):
         im = Image.open(DATA_PATH_1 + input_file)
         w, h = im.size
-        position = (randint(0, WIDTH-w), randint(0, HEIGHT-h))
+        x = (randint(0, WIDTH-w))
+        y = (randint(0, HEIGHT-h))
+        if(input_file == sample_word + '_0.jpg'):
+            print('X-Min: ' + str(x))
+            print('Y-Min: ' + str(y))
+            print('X-Max: ' + str(x + w))
+            print('Y-Max: ' + str(y + h))
+        position = (x, y)
         back_image.paste(im, position)
     back_image.show()
     
