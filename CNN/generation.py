@@ -5,9 +5,11 @@ import os
 from scipy.ndimage import imread
 from scipy.misc import imsave
 import cv2
+import cv2
+import math
+import numpy as np
 
-from PIL import Image
-from PIL import ImageDraw
+from PIL import Image, ImageFilter, ImageDraw
 
 sample_word = sys.argv[1]
 
