@@ -1,6 +1,6 @@
 import xml.etree.ElementTree as ET
 
-# returns XML string.
+# Returns the root element of our XML tree.
 # width, height, and depth are for entire image
 # name, xmin, xmax, ymin, and ymax are for the bounding box
 def makeXML(width, height, depth, name, xmin, xmax, ymin, ymax):
@@ -59,6 +59,9 @@ def makeXML(width, height, depth, name, xmin, xmax, ymin, ymax):
 
     return annotation
 
+# Open output file in write mode
 output_file = open("output.xml", "w")
+# Build a new element tree, passing our root element into the constructor
 element_tree = ET.ElementTree(makeXML(353, 500, 3, "burrito", 50, 150, 70, 170))
+# Write the element tree to the output file
 element_tree.write("output.xml")
