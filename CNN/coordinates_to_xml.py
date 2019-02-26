@@ -59,9 +59,10 @@ def makeXML(width, height, depth, name, xmin, xmax, ymin, ymax):
 
     return annotation
 
-# Open output file in write mode
-output_file = open("output.xml", "w")
-# Build a new element tree, passing our root element into the constructor
-element_tree = ET.ElementTree(makeXML(353, 500, 3, "burrito", 50, 150, 70, 170))
-# Write the element tree to the output file
-element_tree.write("output.xml")
+def write_xml(filename, word, x_min, x_max, y_min, y_max, width, height, depth=3):
+    # Open output file in write mode
+    output_file = open(filename, "w")
+    # Build a new element tree, passing our root element into the constructor
+    element_tree = ET.ElementTree(makeXML(width, height, depth, word, x_min, x_max, y_min, y_max))
+    # Write the element tree to the output file
+    element_tree.write(filename)
