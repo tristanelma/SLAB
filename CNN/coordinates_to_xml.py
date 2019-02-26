@@ -3,13 +3,13 @@ import xml.etree.ElementTree as ET
 # Returns the root element of our XML tree.
 # width, height, and depth are for entire image
 # name, xmin, xmax, ymin, and ymax are for the bounding box
-def makeXML(width, height, depth, name, xmin, xmax, ymin, ymax):
+def makeXML(width, height, depth, name, xmin, xmax, ymin, ymax, pic_file):
     annotation = ET.Element('annotation')
 
     folder = ET.SubElement(annotation, 'folder')
     folder.text = "SLAB"
     filename = ET.SubElement(annotation, 'filename')
-    filename.text = "000001.jpg"
+    filename.text = pic_file
 
     source = ET.SubElement(annotation, 'source')
     database = ET.SubElement(source, 'database')
@@ -59,10 +59,10 @@ def makeXML(width, height, depth, name, xmin, xmax, ymin, ymax):
 
     return annotation
 
-def write_xml(filename, word, x_min, x_max, y_min, y_max, width, height, depth=3):
+def write_xml(xml_file, word, x_min, x_max, y_min, y_max, width, height, pic_file, depth=3):
     # Open output file in write mode
-    output_file = open(filename, "w")
+    output_file = open(xml_file, "w")
     # Build a new element tree, passing our root element into the constructor
-    element_tree = ET.ElementTree(makeXML(width, height, depth, word, x_min, x_max, y_min, y_max))
+    element_tree = ET.ElementTree(makeXML(width, height, depth, word, x_min, x_max, y_min, y_max, pic_file))
     # Write the element tree to the output file
-    element_tree.write(filename)
+    element_tree.write(xml_file)
