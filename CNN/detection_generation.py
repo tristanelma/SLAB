@@ -55,7 +55,7 @@ if __name__ == '__main__':
     lang.write(sample_word + '\n')
     lang.close()
 
-    POSITIVE_SAMPLES = 100
+    POSITIVE_SAMPLES = 10000
     HEIGHT = 400
     WIDTH = 400
 
