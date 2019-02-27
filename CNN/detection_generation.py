@@ -9,7 +9,7 @@ from coordinates_to_xml import write_xml
 
 from PIL import Image, ImageDraw, ImageFilter
 
-def assembled_background_photo(word, special_word, rand_word_1, rand_word_2, height, width, pic_file, xml_file):
+def assembled_background_photo(word, special_word, rand_word_1, rand_word_2, height, width, pic_file, xml_file, picture_dir):
     # background base
     image = np.ones((height, width)) * 255
     cv2.randn(image, 235, 10)
@@ -40,7 +40,7 @@ def assembled_background_photo(word, special_word, rand_word_1, rand_word_2, hei
     position = (x, y)
     back_image.paste(im_3, position)
 
-    back_image.save(pic_file)
+    back_image.save(processed_photos + pic_file)
 
 if __name__ == '__main__':
 
@@ -91,7 +91,7 @@ if __name__ == '__main__':
         rand_word_1 = list_of_ran[2*i]
         rand_word_2 = list_of_ran[2*i + 1]
 
-        assembled_background_photo(sample_word, special_word, rand_word_1, rand_word_2, HEIGHT, WIDTH, 'positive' + str(i) + '.jpg', labels + 'positive' + str(i) + '.xml')
+        assembled_background_photo(sample_word, special_word, rand_word_1, rand_word_2, HEIGHT, WIDTH, 'positive' + str(i) + '.jpg', labels + 'positive' + str(i) + '.xml', processed_photos)
         i += 1
     
     os.system('rm -rf ' + DATA_PATH_1)
