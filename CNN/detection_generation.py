@@ -91,7 +91,7 @@ if __name__ == '__main__':
         rand_word_1 = list_of_ran[2*i]
         rand_word_2 = list_of_ran[2*i + 1]
 
-        assembled_background_photo(sample_word, special_word, rand_word_1, rand_word_2, HEIGHT, WIDTH, processed_photos + 'positive' + str(i) + '.jpg', labels + 'positive' + str(i) + '.xml')
+        assembled_background_photo(sample_word, special_word, rand_word_1, rand_word_2, HEIGHT, WIDTH, 'positive' + str(i) + '.jpg', labels + 'positive' + str(i) + '.xml')
         i += 1
     
     os.system('rm -rf ' + DATA_PATH_1)
