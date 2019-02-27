@@ -55,9 +55,9 @@ if __name__ == '__main__':
     lang.write(sample_word + '\n')
     lang.close()
 
-    POSITIVE_SAMPLES = 10000
-    HEIGHT = 400
-    WIDTH = 400
+    POSITIVE_SAMPLES = 100
+    HEIGHT = 500
+    WIDTH = 500
 
     DATAGEN_LOC = 'TextRecognitionDataGenerator/TextRecognitionDataGenerator/run.py'
     os.system('rm -rf ' + labels)
@@ -65,7 +65,8 @@ if __name__ == '__main__':
     os.system('rm -rf ' + DATA_PATH_1)
     os.system('rm -rf ' + DATA_PATH_2)
 
-    os.system('python ' + DATAGEN_LOC + ' --output_dir data_generation/specialword -na 0 -l sp -c ' + str(POSITIVE_SAMPLES) + ' -w 1')
+    os.system('python ' + DATAGEN_LOC + ' --output_dir data_generation/specialword -na 0 -l sp -c ' + str(int(POSITIVE_SAMPLES/2)) + ' -w 1')
+    os.system('python ' + DATAGEN_LOC + ' --output_dir data_generation/specialword -na 1 -l sp -c ' + str(int(POSITIVE_SAMPLES/2)) + ' -w 1 -bl 2 -rbl')
     os.system('python ' + DATAGEN_LOC + ' --output_dir data_generation/randomwords -na 0 -l en -c ' + str(2*POSITIVE_SAMPLES) + ' -w 1')
 
     image = np.ones((HEIGHT, WIDTH)) * 255
