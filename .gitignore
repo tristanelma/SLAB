@@ -1,3 +1,5 @@
 CNN/TextRecognitionDataGenerator/**
 .DS_Store
 CNN/data_generation/**
+CNN/background_images/*
+CNN/pictures/*
