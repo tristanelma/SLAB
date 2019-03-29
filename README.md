@@ -10,4 +10,8 @@
 - Enter `CNN/` and run `python detection_generation.py [keyword]` to generate a detection training set with that specific word. As of now, the training set will be 10,000 images strong. This can be edited via `detection_generation.py`. The training set will be saved in `data_generation/pictures` and the corresponding xml files will be stored in `data_generation/labels`. This data is not tracked by github.
 
 ## Step 4
-- We are working on an automated detection model. We are currently working on a YOLO implementation.
+- We are using the [Yolo](https://pjreddie.com/media/files/papers/yolo.pdf) algorithm for the detection of shop signs.
+
+### Yolo intuition:
+1. Split the image into a grid 
+2. Each grid cell is now responsible for creating 
