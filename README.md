@@ -71,6 +71,6 @@
     
     When darkflow sees you are loading `tiny-yolo-voc.weights` it will look for `tiny-yolo-voc.cfg` in your cfg/ folder and compare that configuration file to the new one you have set with `--model cfg/tiny-yolo-voc-3c.cfg`. In this case, every layer will have the same exact number of weights except for the last two, so it will load the weights into all layers up to the last two because they now contain different number of weights.
 
-6. Run `./flow --model ./cfg/tiny-yolo-voc.cfg --train --dataset <DATASET DIRECTORY> --annotation <ANNOTATIONS DIRECTORY> --gpu 1.0`
+6. Run `./flow --model ./cfg/tiny-yolo-voc-<CUSTOM INPUT>.cfg --load bin/tiny-yolo-voc.weights --train --dataset <DATASET DIRECTORY> --annotation <ANNOTATIONS DIRECTORY> --gpu 1.0`
 
-7. Run `python yolo_predict.py <DATA_DIRECTORY> --save_dir <SAVE_DIRECTORY>` -> This will save the images with the bounding boxes to your desired save_dir. [Work In Progress]
+7. Run `python yolo_predict.py <DATA_DIRECTORY>` -> This will save the images with the bounding boxes to your desired save_dir or default: `./darkflow/predictions/`.
