@@ -11,7 +11,7 @@
 
 ## Step 4
 1. We are using the [Yolo](https://pjreddie.com/media/files/papers/yolo.pdf) algorithm for the detection of shop signs.
-2. Follow this tutorial to [install](https://keponk.wordpress.com/2017/12/07/siraj-darkflow/) OR `python3 setup.py build_ext --inplace`
+2. Follow this tutorial to [install](https://keponk.wordpress.com/2017/12/07/siraj-darkflow/) OR `cd` into `./darkflow` and run `python3 setup.py build_ext --inplace`
 3. Download ckpt folder and place it into `./darkflow` from [here](https://www.dropbox.com/s/wj55e21c1rt840d/ckpt.zip?dl=1)
 4. Download build_graph folder and place it into `./darkflow` from [here](https://www.dropbox.com/s/3aoclc827ylp06r/built_graph.zip?dl=1)
 5. Download bin folder and place it into `./darkflow` from [here](https://www.dropbox.com/s/3aprlyhg7fsrh4z/bin.zip?dl=1)
