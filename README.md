@@ -11,9 +11,10 @@
 
 ## Step 4
 1. We are using the [Yolo](https://pjreddie.com/media/files/papers/yolo.pdf) algorithm for the detection of shop signs.
-2. Download ckpt folder and place it into `./darkflow` from here -> https://www.dropbox.com/s/wj55e21c1rt840d/ckpt.zip?dl=1
-3. Download build_graph folder and place it into `./darkflow` from here -> https://www.dropbox.com/s/3aoclc827ylp06r/built_graph.zip?dl=1
-4. Download bin folder and place it into `./darkflow` from here ->  https://www.dropbox.com/s/3aprlyhg7fsrh4z/bin.zip?dl=1
+2. Follow this tutorial to [install](https://keponk.wordpress.com/2017/12/07/siraj-darkflow/) OR `python3 setup.py build_ext --inplace`
+3. Download ckpt folder and place it into `./darkflow` from [here](https://www.dropbox.com/s/wj55e21c1rt840d/ckpt.zip?dl=1)
+4. Download build_graph folder and place it into `./darkflow` from [here](https://www.dropbox.com/s/3aoclc827ylp06r/built_graph.zip?dl=1)
+5. Download bin folder and place it into `./darkflow` from [here](https://www.dropbox.com/s/3aprlyhg7fsrh4z/bin.zip?dl=1)
 
 ### Training with Pre-trained Pascal VOC weights:
 *The steps below assume we want to use tiny YOLO and our dataset has 3 classes*
@@ -70,6 +71,6 @@
     
     When darkflow sees you are loading `tiny-yolo-voc.weights` it will look for `tiny-yolo-voc.cfg` in your cfg/ folder and compare that configuration file to the new one you have set with `--model cfg/tiny-yolo-voc-3c.cfg`. In this case, every layer will have the same exact number of weights except for the last two, so it will load the weights into all layers up to the last two because they now contain different number of weights.
 
-6. Run `flow --model ./cfg/tiny-yolo-voc.cfg --train --dataset <DATASET DIRECTORY> --annotation <ANNOTATIONS DIRECTORY> --gpu 1.0`
+6. Run `./flow --model ./cfg/tiny-yolo-voc.cfg --train --dataset <DATASET DIRECTORY> --annotation <ANNOTATIONS DIRECTORY> --gpu 1.0`
 
 7. Run `python yolo_predict.py <DATA_DIRECTORY> --save_dir <SAVE_DIRECTORY>` -> This will save the images with the bounding boxes to your desired save_dir. [Work In Progress]
