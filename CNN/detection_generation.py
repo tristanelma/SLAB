@@ -8,40 +8,7 @@ import numpy as np
 from scipy.ndimage import imread
 from coordinates_to_xml import write_xml
 
-from PIL import Image, ImageDraw, ImageFilter
-
-'''def assembled_background_photo(word, special_word, rand_word_1, rand_word_2, height, width, pic_file, xml_file, picture_dir):
-    # background base
-    image = np.ones((height, width)) * 255
-    cv2.randn(image, 235, 10)
-    back_image = Image.fromarray(image).convert('RGB')
-
-    # word we care about
-    im_1 = Image.open(special_word)
-    w, h = im_1.size
-    x = (randint(0, width-w))
-    y = (randint(0, height-h))
-    position = (x, y)
-    back_image.paste(im_1, position)
-    #saving relevant xml file
-    write_xml(xml_file, word, x, x+w, y, y+h, width, height, pic_file)
-
-    #random words
-    im_2 = Image.open(rand_word_1)
-    w, h = im_2.size
-    x = (randint(0, width-w))
-    y = (randint(0, height-h))
-    position = (x, y)
-    back_image.paste(im_2, position)
-
-    im_3 = Image.open(rand_word_2)
-    w, h = im_3.size
-    x = (randint(0, width-w))
-    y = (randint(0, height-h))
-    position = (x, y)
-    back_image.paste(im_3, position)
-
-    back_image.save(processed_photos + pic_file)'''
+from PIL import Image, ImageDraw, ImageFilter, ImageOps
 
 def rand_back(back_dir):
     a=random.choice(os.listdir(back_dir))
@@ -53,13 +20,29 @@ def assembled_background_photo(special_word, height, width, pic_file, xml_file, 
 
     # word we care about
     im_1 = Image.open(special_word)
-    w, h = im_1.size
-    x = (randint(0, width-w))
-    y = (randint(0, height-h))
+    # make image black and white
+    im_1 = im_1.convert('L')
+    if (random.uniform(0,1) > 0.5):
+        im_1 = ImageOps.invert(im_1)
+    angle = random.randint(-3,3)
+    rot = im_1.rotate(angle, expand=1)
+    r_w, r_h = rot.size
+    x = (randint(0, max(1,width-r_w)))
+    y = (randint(0, max(1,height-r_h)))
     position = (x, y)
-    back_image.paste(im_1, position)
+    back_image.paste(rot, position, rot)
+    if (random.uniform(0,1) > 0.7):
+        w = random.randint(1, back_image.size[1]/4)
+        x1 = random.randint(0, back_image.size[0])
+        y1 = random.randint(0, back_image.size[1])
+        x2 = random.randint(0, back_image.size[0])
+        y2 = random.randint(0, back_image.size[1])
+        img_draw = ImageDraw.Draw(back_image)
+        img_draw.line([(x1, y1), (x2, y2)], width=w, fill='brown')
+    
+    back_image = back_image.convert('L')
     #saving relevant xml file
-    write_xml(xml_file, 'sign' , x, x+w, y, y+h, width, height, pic_file)
+    write_xml(xml_file, 'sign' , x, x+r_w, y, y+r_h, width, height, pic_file)
 
     back_image.save(processed_photos + pic_file)
 
@@ -78,9 +61,9 @@ if __name__ == '__main__':
     lang.write(sample_word + '\n')
     lang.close()'''
 
-    SAMPLES_PER_LANGUAGE = 100
-    HEIGHT = 500
-    WIDTH = 500
+    SAMPLES_PER_LANGUAGE = 2000
+    HEIGHT = 600
+    WIDTH = 600
 
     DATAGEN_LOC = 'TextRecognitionDataGenerator/TextRecognitionDataGenerator/run.py'
     os.system('rm -rf ' + labels)

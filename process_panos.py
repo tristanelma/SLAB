@@ -31,13 +31,11 @@ def sliding_window(image, step_size=300, window_size=(600, 600)):
     '''
         FUNCTION: To create generator of coordinates
                   for small image of window sizes with stride and stepSize
-
         Parameters
         ----------
         image: (numpy.ndarray) Original image to create subset of images from
         step_size: (int) Number of Pixels to slide over when getting new image
         window_size: ((int, int)) Size (Height, Width) of derived images created
-
         Returns
         -------
         Python Generator of images derived from original image

@@ -3,3 +3,4 @@ CNN/TextRecognitionDataGenerator/**
 CNN/data_generation/**
 CNN/background_images/*
 CNN/pictures/*
+signs.csv
