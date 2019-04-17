@@ -71,8 +71,7 @@ def mkdir(path):
         else:
             print("(%s) already exists" % (path))
 
-# Main function
-if __name__ == '__main__':
+def sign_detection():
     file_encoding = 'utf8'       
     images_file = "signs.csv"
 
@@ -131,3 +130,10 @@ if __name__ == '__main__':
                     image_url = row[5]
                     panorama_loop(image_url, x1, y1, x2, y2, current_pk)
                 i += 1
+
+def word_detection():
+    
+
+# Main function
+if __name__ == '__main__':
+    sign_detection()
