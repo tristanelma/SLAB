@@ -47,21 +47,24 @@ def assembled_background_photo(special_word, height, width, pic_file, xml_file, 
     back_image.save(processed_photos + pic_file)
 
 if __name__ == '__main__':
+    sample_word = "liquor"
+
     languages = ['en', 'es', 'cn', 'de', 'fr']
 
     # sample_word = sys.argv[1]
     DATA_PATH_1 = 'data_generation/specialword/'
-    # DATA_PATH_2 = 'data_generation/randomwords/'
+    DATA_PATH_2 = 'data_generation/randomwords/'
     processed_photos = 'data_generation/pictures/'
     labels = 'data_generation/labels/'
     BACKGROUND_DIR = 'background_images/'
 
 
-    '''lang = open('dicts/sp.txt','w') 
+    lang = open('dicts/sp.txt','w') 
     lang.write(sample_word + '\n')
-    lang.close()'''
+    lang.close()
 
-    SAMPLES_PER_LANGUAGE = 2000
+    POSITIVE_SAMPLES = 2000
+    SAMPLES_PER_LANGUAGE = 2000/5
     HEIGHT = 600
     WIDTH = 600
 
@@ -69,13 +72,17 @@ if __name__ == '__main__':
     os.system('rm -rf ' + labels)
     os.system('rm -rf ' + processed_photos)
     os.system('rm -rf ' + DATA_PATH_1)
-    # os.system('rm -rf ' + DATA_PATH_2)
+    os.system('rm -rf ' + DATA_PATH_2)
 
+
+    for i in range(POSITIVE_SAMPLES):
+        os.system('python ' + DATAGEN_LOC + ' --output_dir data_generation/specialword -na 0 -l sp -c ' + str(int(POSITIVE_SAMPLES/2)) + ' -w 2 -b')
+        os.system('python ' + DATAGEN_LOC + ' --output_dir data_generation/specialword -na 0 -l sp -c ' + str(int(POSITIVE_SAMPLES/2)) + ' -w 2 -bl 2 -rbl -b')
     # iterate through languages
     for i in range(len(languages)):
         language = languages[i]
-        os.system('python ' + DATAGEN_LOC + ' --output_dir data_generation/specialword -na 0 -l ' + language + ' -c ' + str(int(SAMPLES_PER_LANGUAGE/2)) + ' -w 2 -b')
-        os.system('python ' + DATAGEN_LOC + ' --output_dir data_generation/specialword -na 0 -l ' + language + ' -c ' + str(int(SAMPLES_PER_LANGUAGE/2)) + ' -w 2 -bl 2 -rbl -b')
+        os.system('python ' + DATAGEN_LOC + ' --output_dir data_generation/randomwords -na 0 -l ' + language + ' -c ' + str(int(SAMPLES_PER_LANGUAGE/2)) + ' -w 2 -b')
+        os.system('python ' + DATAGEN_LOC + ' --output_dir data_generation/randomwords -na 0 -l ' + language + ' -c ' + str(int(SAMPLES_PER_LANGUAGE/2)) + ' -w 2 -bl 2 -rbl -b')
     # os.system('python ' + DATAGEN_LOC + ' --output_dir data_generation/randomwords -na 0 -l en -c ' + str(2*POSITIVE_SAMPLES) + ' -w 1')
 
     #image = np.ones((HEIGHT, WIDTH)) * 255
@@ -83,26 +90,24 @@ if __name__ == '__main__':
     #back_image = Image.fromarray(image).convert('RGB')
 
     special_files = os.listdir(DATA_PATH_1)
-    # ran_files = os.listdir(DATA_PATH_2)
+    ran_files = os.listdir(DATA_PATH_2)
     list_of_special = []
-    # list_of_ran = []    
+    list_of_ran = []    
     for _, input_file in enumerate(special_files):
         list_of_special.append(DATA_PATH_1 + input_file)
-
-    '''for _, input_file in enumerate(ran_files):
-        list_of_ran.append(DATA_PATH_2 + input_file)'''
+    for _, input_file in enumerate(ran_files):
+        list_of_ran.append(DATA_PATH_2 + input_file)
     
     i = 0
     os.system('mkdir data_generation/pictures/')
     os.system('mkdir data_generation/labels/')
     while(i < len(list_of_special)):
         special_word = list_of_special[i]
-        '''rand_word_1 = list_of_ran[2*i]
-        rand_word_2 = list_of_ran[2*i + 1]'''
+        rand_word = list_of_ran[i]
 
         assembled_background_photo(special_word, HEIGHT, WIDTH, 'positive' + str(i) + '.jpg', labels + 'positive' + str(i) + '.xml', processed_photos, BACKGROUND_DIR)
         i += 1
     
-    os.system('rm -rf ' + DATA_PATH_1)
+    # os.system('rm -rf ' + DATA_PATH_1)
     # os.system('rm -rf ' + DATA_PATH_2)
     
